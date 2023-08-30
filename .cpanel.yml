@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/sharewar/itf.dynamicsoftware.com.np/
+    - export DEPLOYPATH=/home/itfkavre/public_html/
     - /bin/cp * $DEPLOYPATH
