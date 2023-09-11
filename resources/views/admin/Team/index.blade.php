@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-12 margin-tb">
                 <div class="pull-left">
-                    <h2>Contact </h2>
+                    <h2>Teams </h2>
                 </div>
                 {{-- <div class="pull-right">
                     <a href="{{ route("team.new_team") }}" class="btn {{ Route::is('contact.new_contact') ? 'btn-success' : 'btn-primary' }} float-right mb-2" style="float:center;">No Member Team</a>
@@ -20,7 +20,7 @@
                 <p>{{ $message }}</p>
             </div>
         @endif --}}
-        <table class="table table-bordered">
+        <table class="table table-bordered" id="myTable">
             <thead>
                 <tr>
                     <th>S.No</th>
@@ -167,7 +167,9 @@
     <script>
 
         $(document).ready(function(){
-
+            $(document).ready( function () {
+                $('#myTable').DataTable();
+            } );
             $('.teams-popup').on('click', function(){
                 var team = $(this).data("id");
                 $.ajaxSetup({

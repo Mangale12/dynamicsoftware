@@ -198,9 +198,12 @@
           <div class="col-lg-12 d-flex justify-content-center">
             <ul id="portfolio-flters">
               <li data-filter="*" class="filter-active">All</li>
-              <li data-filter=".filter-app">App</li>
-              <li data-filter=".filter-card">Card</li>
-              <li data-filter=".filter-web">Web</li>
+              @foreach ($categories as $category)
+                <li data-filter=".{{ $category->name }}">{{ $category->name }}</li>
+                {{-- <li data-filter=".filter-card">Card</li>
+                <li data-filter=".filter-web">Web</li> --}}
+              @endforeach
+
             </ul>
           </div>
         </div>
@@ -236,9 +239,9 @@
               <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
             </div>
           </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <img src="public/assets/img/portfolio/portfolio-4.jpg" class="img-fluid" alt="">
+          @foreach ($categories as $category)
+          <div class="col-lg-4 col-md-6 portfolio-item {{ $category->name }}">
+            <img src="{{ asset('public/uploads/category/'.$category->gallery) }}" class="img-fluid" alt="">
             <div class="portfolio-info">
               <h4>Card 2</h4>
               <p>Card</p>
@@ -246,6 +249,8 @@
               <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
             </div>
           </div>
+          @endforeach
+
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-web">
             <img src="public/assets/img/portfolio/portfolio-5.jpg" class="img-fluid" alt="">
@@ -456,7 +461,10 @@
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div class="member">
               <div class="member-img">
-                <a href="{{ route("frontend.teamDetails", $team->slug) }}"><img src="{{ asset('public/images/'.$team->image) }}" class="img-fluid" alt="Team Image"></a>
+                <a href="{{ route("frontend.teamDetails", $team->slug) }}">
+                    <img src="{{ asset('public/images/'.$team->image) }}" class="img-fluid" alt="Team Image" style="height:250px;
+                    width:500px;
+                    object-fit: fill;"></a>
                 <div class="social">
                   <a href=""><i class="bi bi-twitter"></i></a>
                   <a href=""><i class="bi bi-facebook"></i></a>
@@ -465,7 +473,6 @@
                 </div>
               </div>
               <div class="member-info">
-                <a href="{{ route('frontend.teamDetails', $team->slug) }}"><h4 data-id="{{ $team->id }}">{{ $team->name }}</h4>
                 <a href="{{ route('frontend.teamDetails', $team->slug) }}"><h4 style="cursor: pointer" data-id="{{ $team->id }}">{{ $team->name }}</h4></a>
                 <span>{{ $team->position }}</span>
               </div>

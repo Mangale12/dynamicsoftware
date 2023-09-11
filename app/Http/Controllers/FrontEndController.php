@@ -11,6 +11,7 @@ use App\Mail\MailToContact;
 use App\Mail\MailToAdmin;
 use App\Models\Team;
 use App\Models\Category;
+use App\Models\Gallery;
 
 class FrontEndController extends Controller
 {
@@ -19,8 +20,10 @@ class FrontEndController extends Controller
      */
     public function index()
     {
+        $gallery = Gallery::get();
+        $categories = Category::get();
         $teams = Team::get();
-        return view('frontend.index',compact('teams'));
+        return view('frontend.index',compact('teams','gallery','categories'));
     }
 
     /**
@@ -72,6 +75,7 @@ class FrontEndController extends Controller
     }
 
     public function contactForm(){
+
         return view('frontend.contact_form');
     }
     public function contactFormStore(Request $request){

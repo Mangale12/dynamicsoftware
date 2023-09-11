@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Contact;
 use Illuminate\Support\Str;
-
+use Image;
 
 class TeamController extends Controller
 {
@@ -58,8 +58,14 @@ class TeamController extends Controller
         ]);
         $fileName = null;
         if($request->hasFile('image')){
-            $fileName = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('images'),$fileName);
+            $image = $request->file('image');
+            $fileName = time().'.'.$image->extension();
+            $destinationPath = public_path('/images');
+            $img = Image::make($image->path());
+            $img->resize(600, 600, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPath.'/'.$fileName);
+            $destinationPath = public_path('/images');
         }
 
 
@@ -78,13 +84,9 @@ class TeamController extends Controller
         $teamImages = [];
         if($request->hasFile('team_image')){
             foreach($request->file('team_image') as $key=>$teamImage){
-
-
-                $teamImageName  = time().'.'.$teamImage->extension();
-                // $teamImage->move(public_path('uploads/images'),$teamImageName);
-                $teamImages[]= [
-                    $key=>$teamImageName,
-                ];
+                $teamImageName  = time().$key.'.'.$teamImage->extension();
+                $teamImage->move(public_path('uploads/category'),$teamImageName);
+                $teamImages[]=$teamImageName;
             }
         }
         $user->team_images=json_encode($teamImages);
@@ -166,8 +168,19 @@ class TeamController extends Controller
 
         $fileName = null;
         if($request->hasFile('image')){
-            $fileName = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('images'),$fileName);
+
+            if($request->hasFile('image')){
+                $image = $request->file('image');
+                $fileName = time().'.'.$image->extension();
+                $destinationPath = public_path('/images');
+                $img = Image::make($image->path());
+                $img->resize(100, 100, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save($destinationPath.'/'.$fileName);
+                $destinationPath = public_path('/images');
+                $image->move($destinationPath, $fileName);
+            }
+
         }else{
             $fileName = $team->image;
         }

@@ -81,11 +81,12 @@ class ContactController extends Controller
             'name'=>$request->name,
             'email'=>$request->email,
             'address'=>$request->address,
-            'team_id'=>$request->team
+            'team_id'=>$request->team,
+            'team_assigned'=>0,
         ]);
 
 
-        return redirect("contacts")->route()->with('success','Contact has been created successfully.');
+        return redirect("contact.index")->route()->with('success','Contact has been created successfully.');
     }
 
     /**
