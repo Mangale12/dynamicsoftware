@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>BitCrypto</title>
+    <title>ITVKAVRE Admin</title>
     <link rel="icon" href="img/mini_logo.png" type="image/png">
     <link rel="stylesheet" href="{{ asset('public/admin/css/bootstrap1.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('public/admin/vendors/themefy_icon/themify-icons.css') }}" />
