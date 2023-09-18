@@ -4,6 +4,9 @@
 /vendor
 .env.production
 .env
+/public
+/public/images
+public/uploads
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
