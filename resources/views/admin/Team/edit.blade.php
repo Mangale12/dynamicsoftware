@@ -95,7 +95,7 @@
                     <div class="form-group">
                         <strong>teams photo:</strong>
                         <input type="file" name="image" class="form-control" placeholder="contact Address">
-                        @error('address')
+                        @error('image')
                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                         @enderror
                     </div>

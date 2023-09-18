@@ -100,15 +100,15 @@
                     <div class="form-group">
                         <strong>teams photo:</strong>
                         <input type="file" name="image" class="form-control" placeholder="contact Address">
-                        @error('address')
+                        @error('image')
                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
+                {{-- <div class="col-xs-12 col-sm-12 col-md-12">
                     <div id="demo"></div>
 
-                </div>
+                </div> --}}
                 <button type="submit" class="btn btn-primary ml-3">Submit</button>
             </div>
         </form>

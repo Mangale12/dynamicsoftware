@@ -60,12 +60,7 @@ class TeamController extends Controller
         if($request->hasFile('image')){
             $image = $request->file('image');
             $fileName = time().'.'.$image->extension();
-            $destinationPath = public_path('/images');
-            $img = Image::make($image->path());
-            $img->resize(600, 600, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save($destinationPath.'/'.$fileName);
-            $destinationPath = public_path('/images');
+            $image->move(public_path('images/'),$fileName);
         }
 
 
@@ -153,7 +148,7 @@ class TeamController extends Controller
             'facebook' => 'required',
             'instagram' => 'required',
 
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:7048'
         ]);
         $team = Team::where('id',$id)->first();
         $team->name = $request->name;
@@ -166,19 +161,13 @@ class TeamController extends Controller
         $team->facebook = $request->facebook;
         $team->instagram = $request->instagram;
 
-        $fileName = null;
+        $fileName = $team->image;
         if($request->hasFile('image')){
 
             if($request->hasFile('image')){
                 $image = $request->file('image');
                 $fileName = time().'.'.$image->extension();
-                $destinationPath = public_path('/images');
-                $img = Image::make($image->path());
-                $img->resize(100, 100, function ($constraint) {
-                    $constraint->aspectRatio();
-                })->save($destinationPath.'/'.$fileName);
-                $destinationPath = public_path('/images');
-                $image->move($destinationPath, $fileName);
+                $image->move(public_path('images/'),$fileName);
             }
 
         }else{

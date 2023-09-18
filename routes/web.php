@@ -26,6 +26,7 @@ Route::get("contact-form",[FrontEndController::class, "contactForm"])->name("fro
 Route::post("contact-form",[FrontEndController::class, "contactFormStore"])->name("frontend.contactFormStore");
 Route::get("team/{slug}",[FrontEndController::class, "teamDetails"])->name("frontend.teamDetails");
 Route::post('team/contact-details', [TeamController::class, 'contact_details'])->name("team.contact_details");
+Route::get('gallery',[FrontEndController::class, 'index'])->name('gallery.all');
 Route::get('/dashboard', function () {
     return view("admin.dashboard");
 })->middleware(['auth', 'verified'])->name('dashboard');

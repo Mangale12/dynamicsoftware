@@ -18,9 +18,16 @@ class FrontEndController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $gallery = Gallery::get();
+        if($request->category){
+            // $category = Category::where('id', $request->category)->first();
+            $gallery = Gallery::where('category_id',$request->category)->get();
+            return response();
+        }else{
+            $gallery = Gallery::take(10)->get();
+        }
+
         $categories = Category::get();
         $teams = Team::get();
         return view('frontend.index',compact('teams','gallery','categories'));
