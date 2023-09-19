@@ -21,6 +21,7 @@ use App\Http\Controllers\GalleryController;
 
 Route::get('/', [FrontEndController::class,"index"])->name("frontend.home");
 Route::get('/tryryy', [FrontEndController::class,"team"])->name("frontend.team");
+Route::get('home/gallery',[FrontEndController::class, 'gallery'])->name('frontend.gallery');
 
 Route::get("contact-form",[FrontEndController::class, "contactForm"])->name("frontend.contactForm");
 Route::post("contact-form",[FrontEndController::class, "contactFormStore"])->name("frontend.contactFormStore");

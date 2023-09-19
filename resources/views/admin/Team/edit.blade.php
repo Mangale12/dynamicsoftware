@@ -100,10 +100,24 @@
                         @enderror
                     </div>
                 </div> --}}
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div id="demo"></div>
 
-                </div>
+
+
+                    <div class="col-md-12 col-12">
+                        <div class="form-group">
+                            <label for="head_img">Team Image</label>
+                            <div id="demo" class="row">
+                                <div class="col-md-6 remove">
+                                    <div class="img-upload-preview">
+                                        <img loading="lazy"  src="{{ asset('public/images/'.$team->image) }}" class="img-responsive" style="max-height:150px;">
+
+                                        <button type="button" class="btn btn-danger close-btn remove-files"><i class="fa fa-times"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
             <input type="submit" class="btn btn-primary ml-3 form-submit" value="Submit">
 
             </div>

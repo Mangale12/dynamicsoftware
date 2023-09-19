@@ -22,8 +22,7 @@ class FrontEndController extends Controller
     {
         if($request->category){
             // $category = Category::where('id', $request->category)->first();
-            $gallery = Gallery::where('category_id',$request->category)->get();
-            return response();
+            $gallery = Gallery::where('category_id',$request->category)->take(10)->get();
         }else{
             $gallery = Gallery::take(10)->get();
         }
@@ -31,6 +30,16 @@ class FrontEndController extends Controller
         $categories = Category::get();
         $teams = Team::get();
         return view('frontend.index',compact('teams','gallery','categories'));
+    }
+
+    public function gallery(Request $request){
+        $gallery = Gallery::get();
+        $categories = Category::get();
+        if($request->category){
+            $category = Category::where('slug',$request->category)->first();
+            $gallery = Gallery::where('category_id',$category->id)->get();
+        }
+        return view('frontend.gallery',compact('gallery','categories'));
     }
 
     /**

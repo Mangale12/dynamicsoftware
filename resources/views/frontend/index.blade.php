@@ -196,7 +196,7 @@
 
         <div class="row">
           <div class="col-lg-12 d-flex justify-content-center">
-            <ul id="portfolio-flters">
+            {{-- <ul id="portfolio-flters">
 
               <li data-filter="*" class="filter-active">All</li>
               @foreach ($categories as $category)
@@ -204,7 +204,7 @@
                 <li class="category" data-id="{{ $category->id }}">{{ $category->name }}</li>
               @endforeach
 
-            </ul>
+            </ul> --}}
           </div>
         </div>
 
@@ -560,6 +560,7 @@
     $(document).ready(function(){
         $('.category').on("click", function(){
             var category = $(this).data('id');
+            alert("heheh");
             $.ajax({
                 url: '{{ route("frontend.home") }}',  // Replace with your API endpoint URL
                 type: 'GET',
