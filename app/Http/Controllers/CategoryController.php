@@ -63,10 +63,11 @@ class CategoryController extends Controller
     }
     public function destroy(Category $category){
         if($category->category_img != null){
-            if(file_exists(public_path('uploads/category/'.$category_img))){
-                File::delete(public_path('uploads/category/'.$category_img));
+            if(file_exists(public_path('uploads/category/'.$category->category_img))){
+                File::delete(public_path('uploads/category/'.$category->category_img));
             }
         }
+        $category->delete();
         return redirect()->route('category.index');
 
     }
