@@ -56,14 +56,19 @@
                         </td>
                         <td>
                             <form action="{{ route('teams.destroy',$contact->id) }}" method="Post">
+
                                 <a class="btn btn-primary" href="{{ route('teams.edit',$contact->id) }}">Edit</a>
                                 @csrf
-                                {{-- @method('DELETE')
+                                @method('DELETE')
+                                {{--
                                 <button type="submit" class="btn btn-danger">Delete</button> --}}
                                 {{-- <a class="btn btn-primary" href="{{ route('teams.show',$contact->id) }}">View</a> --}}
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-primary teams-popup"  data-id="{{ $contact->id }}">
                                     View
+                                </button>
+                                <button type="submit" class="btn btn-danger ">
+                                    delete
                                 </button>
 
                                 <!-- Modal -->

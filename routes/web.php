@@ -46,6 +46,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('gallery',GalleryController::class);
     Route::post("gallery/delete", [GalleryController::class, 'delete'])->name('gallery.delete');
     Route::post('team/achievement',[TeamController::class, 'achievement'])->name("team.achieve");
+
+    Route::post('team/remove-member',[TeamController::class, 'removeMember'])->name('team.remove');
 });
 Route::get("user/change_password",[App\Controllers\Auth\PasswordResetLinkController::class,"create"])->name("profile.change_password");
 Route::post("contact/contact-us-form",[FrontEndController::class,'contactUsFormStore'])->name("frontend.contactUsFormStore");

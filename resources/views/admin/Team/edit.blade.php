@@ -21,11 +21,21 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <strong>teams Name:</strong>
+                        <strong>Teams Name:</strong>
                         <input type="text" name="name" class="form-control" value="{{ $team->name }}" placeholder="Contact Name">
                         @error('name')
                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                         @enderror
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <strong>Team Member:</strong>
+                        <ul>
+                            @foreach ($team->contact as $member)
+                            <li class="contact d-inline" data-id="{{ $member->id }}">{{ $member->name }}</li><span class="ml-5 d-inline text-danger team-member" style="cursor: pointer;">X</span>
+                            @endforeach
+                        </ul>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
@@ -160,6 +170,35 @@ $(document).ready(function() {
   $('.form-submit').on('click', function(){
     $('.form-data').submit();
   })
+  $('.team-member').on('click', function(){
+            var contact = $('.contact').data('id');
+
+            if(confirm("Do you want to remove Team member ?") == true){
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: '{{ route("team.remove") }}',  // Replace with your API endpoint URL
+                    type: 'POST',
+                    dataType: 'json',  // Set the expected data type
+                    data:{'contact':contact},
+                    success: function(data) {
+                        console.log('success');
+                        location.href = "{{ route('teams.edit',$team->id) }}"
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle errors here
+                        console.error(error);
+                    }
+                });
+            }
+            else{
+                console.log('no');
+            }
+
+        });
 });
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha512-MoRNloxbStBcD8z3M/2BmnT+rg4IsMxPkXaGh2zD6LGNNFE80W3onsAhRcMAMrSoyWL9xD7Ert0men7vR8LUZg==" crossorigin="anonymous" />
@@ -171,6 +210,7 @@ $(document).ready(function() {
 
         <script>
     $(document).ready(function(e) {
+
       var tagsValue = '';
       $('.emails').val(tagsValue).tagsinput();
 

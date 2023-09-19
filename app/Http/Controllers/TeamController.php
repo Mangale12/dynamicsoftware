@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Contact;
 use Illuminate\Support\Str;
 use Image;
+use Illuminate\Support\Facades\File;
 
 class TeamController extends Controller
 {
@@ -185,6 +186,18 @@ class TeamController extends Controller
      */
     public function destroy(Team $team)
     {
-        //
+        if($team->image != null){
+            if(file_exists(public_path('images/'.$team->image))){
+                File::delete(public_path('images/'.$team->image));
+            }
+        }
+        $team->delete();
+        return redirect()->route('teams.index');
+    }
+    public function removeMember(Request $request){
+        $contact = Contact::findOrFail($request->contact)->first();
+        $contact->team_id = null;
+        $contact->update();
+        return response()->json(['message'=>'updated']);
     }
 }
