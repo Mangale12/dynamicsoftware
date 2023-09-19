@@ -143,6 +143,7 @@ class TeamController extends Controller
             'name' => 'required',
             'address' => 'required',
             'contact_no' => 'required',
+            'email'=>'required',
             'position' => 'required',
             'active' => 'required',
             'facebook' => 'required',
@@ -153,7 +154,7 @@ class TeamController extends Controller
         $team = Team::where('id',$id)->first();
         $team->name = $request->name;
         $team->slug = Str::slug($request->input('name'));
-        $team->email = $request->email[0] != null?$request->email[0]:null;
+        $team->email = $request->email[0] != null?$request->email[0]:$team->email;
         $team->address = $request->address;
         $team->contact_no = $request->contact_no[0] != null?$request->contact_no[0]:null;
         $team->position = $request->position;

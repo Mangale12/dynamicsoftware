@@ -96,7 +96,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
+                {{-- <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>teams photo:</strong>
                         <input type="file" name="image" class="form-control" placeholder="contact Address">
@@ -104,11 +104,11 @@
                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                         @enderror
                     </div>
-                </div>
-                {{-- <div class="col-xs-12 col-sm-12 col-md-12">
+                </div> --}}
+                <div class="col-xs-12 col-sm-12 col-md-12">
                     <div id="demo"></div>
 
-                </div> --}}
+                </div>
                 <button type="submit" class="btn btn-primary ml-3">Submit</button>
             </div>
         </form>
@@ -146,8 +146,8 @@ $(document).ready(function(e) {
   $('.emails').val(tagsValue).tagsinput();
 
   $("#demo").spartanMultiImagePicker({
-            fieldName: 'team_image[]',
-            maxCount: 10,
+            fieldName: 'image',
+            maxCount: 1,
           	allowedExt:'png|jpg|jpeg|gif|webp',
             rowHeight: '200px',
             groupClassName: 'col-md-4 col-lg-4',
